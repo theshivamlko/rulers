@@ -114,13 +114,9 @@ class _DemoState extends State<Demo> {
                   child: RulerWidget(
                     scaleSize: 100,
                     scaleColor: Colors.yellow,
-                    indicatorWidget: Column(
-                      children: <Widget>[
-                        Icon(
-                          Icons.arrow_drop_down,
-                          color: Colors.red,
-                        ),
-                      ],
+                    indicatorWidget: Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.red,
                     ),
                     limit: 24,
                     interval: 3,
@@ -146,15 +142,11 @@ class _DemoState extends State<Demo> {
                   child: RulerWidget(
                     scaleSize: 100,
                     scaleColor: Colors.blue[100],
-                    indicatorWidget: Column(
-                      children: <Widget>[
-                        Image.asset(
-                          'assets/marker.png',
-                          color: Colors.red,
-                          height: 25,
-                          width: 25,
-                        ),
-                      ],
+                    indicatorWidget: Image.asset(
+                      'assets/marker.png',
+                      color: Colors.red,
+                      height: 25,
+                      width: 25,
                     ),
                     limit: 24,
                     interval: 3,
