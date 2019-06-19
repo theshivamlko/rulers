@@ -1,8 +1,8 @@
 name: rulers
 description: A new Flutter package.
-version: 1.0.0
+version: 1.0.1
 author: Shivam Srivastava <shivamsrivastava.9@gmail.com>
-homepage: http://navoki.com
+homepage: https://github.com/theshivamlko
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
