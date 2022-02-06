@@ -4,6 +4,9 @@ class RulerWidget extends StatefulWidget {
   /// total visible numbers on scale
   int largeScaleBarsInterval;
 
+  /// number of small bars b/w two [largeScaleBarsInterval] on scale
+  int smallScaleBarsInterval;
+
   /// starting number on scale to show marker [indicatorWidget]
   int lowerIndicatorLimit;
 
@@ -16,11 +19,10 @@ class RulerWidget extends StatefulWidget {
   /// mid ending number on scale
   int upperMidIndicatorLimit;
 
-  /// number of small bars b/w two [largeScaleBarsInterval] on scale
-  int smallScaleBarsInterval;
+
 
   /// color of bars on scale [largeScaleBarsInterval] and [smallScaleBarsInterval]
-  final Color normalBarColor;
+  final Color barsColor;
 
   /// color between [lowerMidIndicatorLimit] and [upperMidIndicatorLimit] bars of scale
   final Color inRangeBarColor;
@@ -51,7 +53,7 @@ class RulerWidget extends StatefulWidget {
       required this.largeScaleBarsInterval,
       required this.smallScaleBarsInterval,
       required this.scaleBackgroundColor,
-      required this.normalBarColor,
+      required this.barsColor,
       this.indicatorWidget = const SizedBox(),
       this.lowerIndicatorLimit = 0,
       this.lowerMidIndicatorLimit = 0,
@@ -111,7 +113,7 @@ class _RulerWidgetState extends State<RulerWidget> {
         midLimitLower: widget.lowerMidIndicatorLimit,
         midLimitUpper: widget.upperMidIndicatorLimit,
         midInterval: widget.smallScaleBarsInterval,
-        normalBarColor: widget.normalBarColor,
+        normalBarColor: widget.barsColor,
         inRangeBarColor: widget.inRangeBarColor,
         behindRangeBarColor: widget.behindRangeBarColor,
         outRangeBarColor: widget.outRangeBarColor,
