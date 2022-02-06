@@ -5,16 +5,16 @@ class RulerWidget extends StatefulWidget {
   int limit;
 
   /// starting number of scale to show marker
-  int lowerLimit;
+  int lowerIndicatorLimit;
 
   /// ending number of scale  to show marker
-  final int upperLimit;
+  final int upperIndicatorLimit;
 
   /// mid starting number of scale (Optional)
-  int midLimitLower;
+  int lowerMidIndicatorLimit;
 
   /// mid ending number of scale (Optional)
-  int midLimitUpper;
+  int upperMidIndicatorLimit;
 
   /// number of small bars of scale
   int smallScaleBarsInterval;
@@ -32,7 +32,7 @@ class RulerWidget extends StatefulWidget {
   final Color behindRangeBarColor;
 
   /// color of scale (Optional)
-  Color scaleColor;
+  Color scaleBackgroundColor;
 
   /// Custom Indicator over bars of scale (Optional)
   Widget indicatorWidget = Container();
@@ -50,13 +50,13 @@ class RulerWidget extends StatefulWidget {
       required this.totalScaleBars,
       required this.limit,
       required this.smallScaleBarsInterval,
-      required this.scaleColor,
-      this.lowerLimit = 0,
-      this.upperLimit = 0,
+      required this.scaleBackgroundColor,
+      required this.normalBarColor,
       this.indicatorWidget = const SizedBox(),
-      this.midLimitLower = 0,
-      this.midLimitUpper = 0,
-      this.normalBarColor = Colors.black,
+      this.lowerIndicatorLimit = 0,
+      this.lowerMidIndicatorLimit = 0,
+      this.upperMidIndicatorLimit = 0,
+      this.upperIndicatorLimit = 0,
       this.inRangeBarColor = Colors.black,
       this.behindRangeBarColor = Colors.black,
       this.outRangeBarColor = Colors.black,
@@ -82,7 +82,7 @@ class _RulerWidgetState extends State<RulerWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: widget.scaleColor,
+      color: widget.scaleBackgroundColor,
       height: widget.axis == Axis.horizontal ? widget.totalScaleBars : null,
       width: widget.axis == Axis.vertical ? widget.totalScaleBars : null,
       child: SingleChildScrollView(
@@ -105,11 +105,11 @@ class _RulerWidgetState extends State<RulerWidget> {
         key: ValueKey(i),
         num: i,
         type: RulerBar.BIG_BAR,
-        lowerLimit: widget.lowerLimit,
-        upperLimit: widget.upperLimit,
+        lowerLimit: widget.lowerIndicatorLimit,
+        upperLimit: widget.upperIndicatorLimit,
         indicatorWidget: widget.indicatorWidget,
-        midLimitLower: widget.midLimitLower,
-        midLimitUpper: widget.midLimitUpper,
+        midLimitLower: widget.lowerMidIndicatorLimit,
+        midLimitUpper: widget.upperMidIndicatorLimit,
         midInterval: widget.smallScaleBarsInterval,
         normalBarColor: widget.normalBarColor,
         inRangeBarColor: widget.inRangeBarColor,
