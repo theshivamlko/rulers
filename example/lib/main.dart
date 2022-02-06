@@ -55,8 +55,11 @@ class _DemoState extends State<Demo> {
                 Container(
                   margin: const EdgeInsets.only(top: 8.0),
                   child: RulerWidget(
-                    scaleSize: 100,
+                    totalScaleBars: 100,
                     scaleColor: Colors.grey.shade100,
+                    limit: 24,
+                    smallScaleBarsInterval: 3,
+                    normalBarColor: Colors.grey,
                     indicatorWidget: Column(
                       children: <Widget>[
                         Icon(
@@ -65,9 +68,6 @@ class _DemoState extends State<Demo> {
                         ),
                       ],
                     ),
-                    limit: 24,
-                    interval: 3,
-                    normalBarColor: Colors.grey,
                   ),
                 ),
                 Padding(
@@ -80,7 +80,7 @@ class _DemoState extends State<Demo> {
                 Container(
                   margin: const EdgeInsets.only(top: 8.0),
                   child: RulerWidget(
-                    scaleSize: 100,
+                    totalScaleBars: 100,
                     scaleColor: Colors.grey.shade100,
                     indicatorWidget: Column(
                       children: <Widget>[
@@ -91,7 +91,7 @@ class _DemoState extends State<Demo> {
                       ],
                     ),
                     limit: 24,
-                    interval: 3,
+                    smallScaleBarsInterval: 3,
                     lowerLimit: 2,
                     midLimitLower: 2,
                     midLimitUpper: 6,
@@ -112,14 +112,18 @@ class _DemoState extends State<Demo> {
                 Container(
                   margin: const EdgeInsets.only(top: 8.0),
                   child: RulerWidget(
-                    scaleSize: 100,
+                    totalScaleBars: 100,
                     scaleColor: Colors.yellow,
-                    indicatorWidget: Icon(
-                      Icons.arrow_drop_down,
-                      color: Colors.red,
+                    indicatorWidget: Column(
+                      children: const <Widget>[
+                        Icon(
+                          Icons.arrow_drop_down,
+                          color: Colors.red,
+                        ),
+                      ],
                     ),
                     limit: 24,
-                    interval: 3,
+                    smallScaleBarsInterval: 3,
                     lowerLimit: 2,
                     midLimitLower: 4,
                     midLimitUpper: 7,
@@ -140,7 +144,7 @@ class _DemoState extends State<Demo> {
                 Container(
                   margin: const EdgeInsets.only(top: 8.0),
                   child: RulerWidget(
-                    scaleSize: 100,
+                    totalScaleBars: 100,
                     scaleColor: Colors.blue.shade100,
                     indicatorWidget: Image.asset(
                       'assets/marker.png',
@@ -149,7 +153,7 @@ class _DemoState extends State<Demo> {
                       width: 25,
                     ),
                     limit: 24,
-                    interval: 3,
+                    smallScaleBarsInterval: 3,
                     lowerLimit: 2,
                     midLimitLower: 2,
                     midLimitUpper: 7,
@@ -172,7 +176,7 @@ class _DemoState extends State<Demo> {
                   alignment: Alignment.centerLeft,
                   child: RulerWidget(
                     scaleColor: Colors.grey.shade100,
-                    scaleSize: 100,
+                    totalScaleBars: 100,
                     indicatorWidget: Column(
                       children: <Widget>[
                         Icon(
@@ -182,7 +186,7 @@ class _DemoState extends State<Demo> {
                       ],
                     ),
                     limit: 20,
-                    interval: 4,
+                    smallScaleBarsInterval: 4,
                     lowerLimit: 0,
                     midLimitLower: 0,
                     midLimitUpper: 0,

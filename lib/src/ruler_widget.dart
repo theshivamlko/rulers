@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 
 class RulerWidget extends StatefulWidget {
   /// total numbers on scale
-  final int limit;
+  int limit;
 
   /// starting number of scale to show marker
-  final int lowerLimit;
+  int lowerLimit;
 
   /// ending number of scale  to show marker
   final int upperLimit;
 
   /// mid starting number of scale (Optional)
-  final int midLimitLower;
+  int midLimitLower;
 
   /// mid ending number of scale (Optional)
-  final int midLimitUpper;
+  int midLimitUpper;
 
   /// number of small bars of scale
-  final int interval;
+  int smallScaleBarsInterval;
 
   /// number color of bars of scale
   final Color normalBarColor;
@@ -32,35 +32,37 @@ class RulerWidget extends StatefulWidget {
   final Color behindRangeBarColor;
 
   /// color of scale (Optional)
-  final Color scaleColor;
+  Color scaleColor;
 
   /// Custom Indicator over bars of scale (Optional)
-  final Widget indicatorWidget;
+  Widget indicatorWidget = Container();
 
   /// height of scale if horizontal or width of scale if vertical (Optional)
-  final double scaleSize;
+  final double totalScaleBars;
 
   /// Scale to be horizontal or vertical ,by default horizontal
   final Axis axis;
 
   final ScrollController? scrollController;
 
-  const RulerWidget(
-      {Key? key, this.limit = 100,
-        this.scaleSize = 100,
-        this.indicatorWidget = const SizedBox(),
-        this.lowerLimit = 0,
-        this.midLimitLower = 0,
-        this.midLimitUpper = 0,
-        this.upperLimit = 0,
-        this.interval = 4,
-        this.normalBarColor = Colors.black,
-        this.scaleColor = Colors.white,
-        this.inRangeBarColor = Colors.black,
-        this.behindRangeBarColor = Colors.black,
-        this.outRangeBarColor = Colors.black,
-        this.scrollController,
-        this.axis = Axis.horizontal}) : super(key: key);
+  RulerWidget(
+      {Key? key,
+      required this.totalScaleBars,
+      required this.limit,
+      required this.smallScaleBarsInterval,
+      required this.scaleColor,
+      this.lowerLimit = 0,
+      this.upperLimit = 0,
+      this.indicatorWidget = const SizedBox(),
+      this.midLimitLower = 0,
+      this.midLimitUpper = 0,
+      this.normalBarColor = Colors.black,
+      this.inRangeBarColor = Colors.black,
+      this.behindRangeBarColor = Colors.black,
+      this.outRangeBarColor = Colors.black,
+      this.scrollController,
+      this.axis = Axis.horizontal})
+      : super(key: key);
 
   @override
   _RulerWidgetState createState() => _RulerWidgetState();
@@ -81,8 +83,8 @@ class _RulerWidgetState extends State<RulerWidget> {
   Widget build(BuildContext context) {
     return Container(
       color: widget.scaleColor,
-      height: widget.axis == Axis.horizontal ? widget.scaleSize : null,
-      width: widget.axis == Axis.vertical ? widget.scaleSize : null,
+      height: widget.axis == Axis.horizontal ? widget.totalScaleBars : null,
+      width: widget.axis == Axis.vertical ? widget.totalScaleBars : null,
       child: SingleChildScrollView(
         controller: widget.scrollController,
         scrollDirection: widget.axis,
@@ -98,7 +100,8 @@ class _RulerWidgetState extends State<RulerWidget> {
 
   void _generateScale() async {
     for (int i = 0; i < widget.limit; i++) {
-      scaleWidgetList.add(RulerBar(
+      print("_generateScale $i");
+      scaleWidgetList.add(RulerBarWidget(
         key: ValueKey(i),
         num: i,
         type: RulerBar.BIG_BAR,
@@ -107,7 +110,7 @@ class _RulerWidgetState extends State<RulerWidget> {
         indicatorWidget: widget.indicatorWidget,
         midLimitLower: widget.midLimitLower,
         midLimitUpper: widget.midLimitUpper,
-        midInterval: widget.interval,
+        midInterval: widget.smallScaleBarsInterval,
         normalBarColor: widget.normalBarColor,
         inRangeBarColor: widget.inRangeBarColor,
         behindRangeBarColor: widget.behindRangeBarColor,
@@ -120,12 +123,11 @@ class _RulerWidgetState extends State<RulerWidget> {
   }
 }
 
-class RulerBar extends StatelessWidget {
-  int type = 1;
+class RulerBarWidget extends StatelessWidget {
+  final RulerBar type;
+
   int num;
 
-  static const int BIG_BAR = 1;
-  static const int SMALL_BAR = 2;
   int midInterval;
   int lowerLimit;
   int upperLimit;
@@ -138,40 +140,41 @@ class RulerBar extends StatelessWidget {
   Widget indicatorWidget;
   Axis axis;
 
-  RulerBar(
+  RulerBarWidget(
       {Key? key,
-        required this.num,
-        required this.type,
-        required this.indicatorWidget,
-        required this.lowerLimit,
-        required this.midLimitLower,
-        required this.midLimitUpper,
-        required this.upperLimit,
-        required this.midInterval,
-        required this.normalBarColor,
-        required this.inRangeBarColor,
-        required this.behindRangeBarColor,
-        required this.outRangeBarColor,
-        required this.axis})
+      required this.num,
+      required this.type,
+      required this.indicatorWidget,
+      required this.lowerLimit,
+      required this.midLimitLower,
+      required this.midLimitUpper,
+      required this.upperLimit,
+      required this.midInterval,
+      required this.normalBarColor,
+      required this.inRangeBarColor,
+      required this.behindRangeBarColor,
+      required this.outRangeBarColor,
+      required this.axis})
       : super(key: key);
 
-  double spacing = 5.0;
-  List<Widget> children = [];
-  bool show = false;
+  final double _spacing = 5.0;
+  List<Widget> _children = List.empty(growable: true);
+  bool _show = false;
 
   @override
   Widget build(BuildContext context) {
-    _getSmallBars();
+    if (_children.isEmpty) _getSmallBars();
+
     return Container(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: children,
+        children: _children,
       ),
     );
   }
 
   /// get color of small bar according to range
-  Color _getSmallBarColor(int num) {
+  Color _getSmallBarColor() {
     if (_getScalePosition(num) >= _getScalePosition(lowerLimit) &&
         _getScalePosition(num) < _getScalePosition(midLimitLower))
       return behindRangeBarColor;
@@ -192,7 +195,7 @@ class RulerBar extends StatelessWidget {
   }
 
   /// get color of bigger bar according to range
-  Color _getBigBarColor(int num) {
+  Color _getBigBarColor() {
     if (_getScalePosition(num) >= _getScalePosition(lowerLimit) &&
         _getScalePosition(num) < _getScalePosition(midLimitLower))
       return normalBarColor;
@@ -209,25 +212,23 @@ class RulerBar extends StatelessWidget {
   void _getSmallBars() {
     num = num + 1;
 
-    show = lowerLimit == num ||
+    _show = lowerLimit == num ||
         upperLimit == num ||
         midLimitLower == num ||
         midLimitUpper == num;
 
-    children = [];
+    _children = List.empty(growable: true);
 
-    children.add(
+    _children.add(
       Stack(
         alignment: Alignment.topCenter,
         children: <Widget>[
-          show
-              ? indicatorWidget
-              : Container(),
+          _show ? indicatorWidget : Container(),
           Padding(
             padding: const EdgeInsets.only(top: 20.0),
             child: Container(
-              margin: EdgeInsets.all(spacing),
-              color: _getBigBarColor(num),
+              margin: EdgeInsets.all(_spacing),
+              color: _getBigBarColor(),
               width: 2,
               height: 20,
             ),
@@ -247,11 +248,11 @@ class RulerBar extends StatelessWidget {
     );
 
     for (int i = 1; i <= midInterval; i++) {
-      children.add(Padding(
+      _children.add(Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: Container(
-          margin: EdgeInsets.all(spacing),
-          color: _getSmallBarColor(num),
+          margin: EdgeInsets.all(_spacing),
+          color: _getSmallBarColor(),
           width: 2,
           height: 10,
         ),
@@ -263,3 +264,5 @@ class RulerBar extends StatelessWidget {
     return num + (num - 1) * 3;
   }
 }
+
+enum RulerBar { BIG_BAR, SMALL_BAR }
