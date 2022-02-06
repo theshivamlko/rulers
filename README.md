@@ -1,7 +1,6 @@
 # Rulers
 
 A Flutter Widget to show Ruler with selected values
-<a href="https://github.com/theshivamlko/rulers_flutter_example"><b>Example code is here</b></a>
 
 <img src="https://raw.githubusercontent.com/theshivamlko/rulers_flutter_package/master/rulers.gif" width="220" alt="Flutter Rulers" />
 <br/><br/>
