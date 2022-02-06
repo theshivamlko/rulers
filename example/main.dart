@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primarySwatch: Colors.blue,
           textTheme: TextTheme(
-              title: TextStyle(
+              headline3: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: 20))),
@@ -50,13 +50,13 @@ class _DemoState extends State<Demo> {
               children: <Widget>[
                 Text(
                   'Normal Scale',
-                  style: Theme.of(context).textTheme.title,
+                  style: Theme.of(context).textTheme.headline3,
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: 8.0),
                   child: RulerWidget(
                     scaleSize: 100,
-                    scaleColor: Colors.grey[100],
+                    scaleColor: Colors.grey.shade100,
                     indicatorWidget: Column(
                       children: <Widget>[
                         Icon(
@@ -74,14 +74,14 @@ class _DemoState extends State<Demo> {
                   padding: const EdgeInsets.only(top: 20.0),
                   child: Text(
                     'In and Out Range Scale',
-                    style: Theme.of(context).textTheme.title,
+                    style: Theme.of(context).textTheme.headline3,
                   ),
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: 8.0),
                   child: RulerWidget(
                     scaleSize: 100,
-                    scaleColor: Colors.grey[100],
+                    scaleColor: Colors.grey.shade100,
                     indicatorWidget: Column(
                       children: <Widget>[
                         Icon(
@@ -106,7 +106,7 @@ class _DemoState extends State<Demo> {
                   padding: const EdgeInsets.only(top: 20.0),
                   child: Text(
                     'In,Out,Mid Range Scale',
-                    style: Theme.of(context).textTheme.title,
+                    style: Theme.of(context).textTheme.headline3,
                   ),
                 ),
                 Container(
@@ -134,14 +134,14 @@ class _DemoState extends State<Demo> {
                   padding: const EdgeInsets.only(top: 20.0),
                   child: Text(
                     'Custom Marker Scale',
-                    style: Theme.of(context).textTheme.title,
+                    style: Theme.of(context).textTheme.headline3,
                   ),
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: 8.0),
                   child: RulerWidget(
                     scaleSize: 100,
-                    scaleColor: Colors.blue[100],
+                    scaleColor: Colors.blue.shade100,
                     indicatorWidget: Image.asset(
                       'assets/marker.png',
                       color: Colors.red,
@@ -164,14 +164,14 @@ class _DemoState extends State<Demo> {
                   padding: const EdgeInsets.only(top: 20.0),
                   child: Text(
                     'Horizontal Scale',
-                    style: Theme.of(context).textTheme.title,
+                    style: Theme.of(context).textTheme.headline3,
                   ),
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: 8.0),
                   alignment: Alignment.centerLeft,
                   child: RulerWidget(
-                    scaleColor: Colors.grey[100],
+                    scaleColor: Colors.grey.shade100,
                     scaleSize: 100,
                     indicatorWidget: Column(
                       children: <Widget>[

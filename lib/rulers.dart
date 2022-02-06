@@ -1,3 +1,3 @@
 library rulers;
 
-export 'src/RulerWidget.dart';
+export 'src/ruler_widget.dart';
