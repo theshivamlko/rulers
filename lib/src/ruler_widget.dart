@@ -221,14 +221,7 @@ class RulerBar extends StatelessWidget {
         alignment: Alignment.topCenter,
         children: <Widget>[
           show
-              ? indicatorWidget ?? Container()
-          /*Text(
-                  num.toString(),
-                  style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.red,
-                      fontWeight: FontWeight.bold),
-                )*/
+              ? indicatorWidget
               : Container(),
           Padding(
             padding: const EdgeInsets.only(top: 20.0),
