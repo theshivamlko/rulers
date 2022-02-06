@@ -11,7 +11,7 @@ A Flutter Widget to show Ruler with selected values
 You should ensure that you add the following dependency in your Flutter project.
 ```yaml
 dependencies:
- rulers: "^1.0.4"
+ rulers: "^1.0.5"
 ```
 You should then run `flutter packages get` in terminal.
 
