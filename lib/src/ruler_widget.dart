@@ -1,44 +1,44 @@
 import 'package:flutter/material.dart';
 
 class RulerWidget extends StatefulWidget {
-  /// total numbers on scale
-  int limit;
+  /// total visible numbers on scale
+  int largeScaleBarsInterval;
 
-  /// starting number of scale to show marker
+  /// starting number on scale to show marker [indicatorWidget]
   int lowerIndicatorLimit;
 
-  /// ending number of scale  to show marker
+  /// ending number on scale  to show marker [indicatorWidget]
   final int upperIndicatorLimit;
 
-  /// mid starting number of scale (Optional)
+  /// mid starting number on scale
   int lowerMidIndicatorLimit;
 
-  /// mid ending number of scale (Optional)
+  /// mid ending number on scale
   int upperMidIndicatorLimit;
 
-  /// number of small bars of scale
+  /// number of small bars b/w two [largeScaleBarsInterval] on scale
   int smallScaleBarsInterval;
 
-  /// number color of bars of scale
+  /// color of bars on scale [largeScaleBarsInterval] and [smallScaleBarsInterval]
   final Color normalBarColor;
 
-  /// color between lowerLimit and upperLimit bars of scale (Optional)
+  /// color between [lowerMidIndicatorLimit] and [upperMidIndicatorLimit] bars of scale
   final Color inRangeBarColor;
 
-  /// color between midLimitUpper and upperLimit bars of scale (Optional)
+  /// color between [upperMidIndicatorLimit] and [upperIndicatorLimit] bars of scale (Optional)
   final Color outRangeBarColor;
 
-  /// color between midLimitLower and lowerLimit bars of scale (Optional)
+  /// color between [lowerMidIndicatorLimit] and [lowerIndicatorLimit] bars of scale (Optional)
   final Color behindRangeBarColor;
 
-  /// color of scale (Optional)
+  /// color of scale
   Color scaleBackgroundColor;
 
-  /// Custom Indicator over bars of scale (Optional)
+  /// Custom Indicator over bars on scale
   Widget indicatorWidget = Container();
 
-  /// height of scale if horizontal or width of scale if vertical (Optional)
-  final double totalScaleBars;
+  /// height of scale if horizontal or width of scale if vertical
+  final double height;
 
   /// Scale to be horizontal or vertical ,by default horizontal
   final Axis axis;
@@ -47,8 +47,8 @@ class RulerWidget extends StatefulWidget {
 
   RulerWidget(
       {Key? key,
-      required this.totalScaleBars,
-      required this.limit,
+      required this.height,
+      required this.largeScaleBarsInterval,
       required this.smallScaleBarsInterval,
       required this.scaleBackgroundColor,
       required this.normalBarColor,
@@ -83,8 +83,8 @@ class _RulerWidgetState extends State<RulerWidget> {
   Widget build(BuildContext context) {
     return Container(
       color: widget.scaleBackgroundColor,
-      height: widget.axis == Axis.horizontal ? widget.totalScaleBars : null,
-      width: widget.axis == Axis.vertical ? widget.totalScaleBars : null,
+      height: widget.axis == Axis.horizontal ? widget.height : null,
+      width: widget.axis == Axis.vertical ? widget.height : null,
       child: SingleChildScrollView(
         controller: widget.scrollController,
         scrollDirection: widget.axis,
@@ -99,7 +99,7 @@ class _RulerWidgetState extends State<RulerWidget> {
   }
 
   void _generateScale() async {
-    for (int i = 0; i < widget.limit; i++) {
+    for (int i = 0; i < widget.largeScaleBarsInterval; i++) {
       print("_generateScale $i");
       scaleWidgetList.add(RulerBarWidget(
         key: ValueKey(i),

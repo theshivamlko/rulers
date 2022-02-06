@@ -55,9 +55,9 @@ class _DemoState extends State<Demo> {
                 Container(
                   margin: const EdgeInsets.only(top: 8.0),
                   child: RulerWidget(
-                    totalScaleBars: 100,
+                    height: 100,
                     scaleBackgroundColor: Colors.grey.shade200,
-                    limit: 24,
+                    largeScaleBarsInterval: 24,
                     smallScaleBarsInterval: 3,
                     normalBarColor: Colors.grey,
                     indicatorWidget: Column(
@@ -80,7 +80,7 @@ class _DemoState extends State<Demo> {
                 Container(
                   margin: const EdgeInsets.only(top: 8.0),
                   child: RulerWidget(
-                    totalScaleBars: 100,
+                    height: 100,
                     scaleBackgroundColor: Colors.grey.shade100,
                     indicatorWidget: Column(
                       children: const <Widget>[
@@ -90,7 +90,7 @@ class _DemoState extends State<Demo> {
                         ),
                       ],
                     ),
-                    limit: 24,
+                    largeScaleBarsInterval: 24,
                     smallScaleBarsInterval: 3,
                     lowerIndicatorLimit: 2,
                     lowerMidIndicatorLimit: 2,
@@ -112,7 +112,7 @@ class _DemoState extends State<Demo> {
                 Container(
                   margin: const EdgeInsets.only(top: 8.0),
                   child: RulerWidget(
-                    totalScaleBars: 100,
+                    height: 100,
                     scaleBackgroundColor: Colors.yellow,
                     indicatorWidget: Column(
                       children: const <Widget>[
@@ -122,7 +122,7 @@ class _DemoState extends State<Demo> {
                         ),
                       ],
                     ),
-                    limit: 24,
+                    largeScaleBarsInterval: 24,
                     smallScaleBarsInterval: 3,
                     lowerIndicatorLimit: 2,
                     lowerMidIndicatorLimit: 4,
@@ -144,7 +144,7 @@ class _DemoState extends State<Demo> {
                 Container(
                   margin: const EdgeInsets.only(top: 8.0),
                   child: RulerWidget(
-                    totalScaleBars: 100,
+                    height: 100,
                     scaleBackgroundColor: Colors.blue.shade100,
                     indicatorWidget: Image.asset(
                       'assets/marker.png',
@@ -152,7 +152,7 @@ class _DemoState extends State<Demo> {
                       height: 25,
                       width: 25,
                     ),
-                    limit: 24,
+                    largeScaleBarsInterval: 24,
                     smallScaleBarsInterval: 3,
                     lowerIndicatorLimit: 2,
                     lowerMidIndicatorLimit: 2,
@@ -176,7 +176,7 @@ class _DemoState extends State<Demo> {
                   alignment: Alignment.centerLeft,
                   child: RulerWidget(
                     scaleBackgroundColor: Colors.grey.shade100,
-                    totalScaleBars: 100,
+                    height: 100,
                     indicatorWidget: Column(
                       children: <Widget>[
                         Icon(
@@ -185,7 +185,7 @@ class _DemoState extends State<Demo> {
                         ),
                       ],
                     ),
-                    limit: 20,
+                    largeScaleBarsInterval: 20,
                     smallScaleBarsInterval: 4,
                     lowerIndicatorLimit: 0,
                     lowerMidIndicatorLimit: 0,
